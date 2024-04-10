@@ -22,7 +22,6 @@ export default {
   },
   methods: {
     login() {
-      // Đưa thông tin đăng nhập vào hàm login để xử lý
       this.$emit('login', {
         USERNAME: this.username,
         PASSWORD: this.password

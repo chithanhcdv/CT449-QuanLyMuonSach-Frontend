@@ -66,7 +66,6 @@ export default {
   },
   methods: {
     logout() {
-      // Xử lý đăng xuất ở đây
       localStorage.removeItem('User_token');
       localStorage.removeItem('MADOCGIA');
       this.isLoggedIn = false;

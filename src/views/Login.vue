@@ -28,19 +28,14 @@ export default {
   methods: {
     async handleLogin(credentials) {
       try {
-        // Thực hiện đăng nhập và lấy MADOCGIA từ phản hồi
         const response = await ReaderService.login(credentials);
         const { MADOCGIA } = response.user;
 
-        // Lưu MADOCGIA vào localStorage
         localStorage.setItem('MADOCGIA', MADOCGIA);
-        // Lưu trạng thái đăng nhập
         localStorage.setItem('User_token', true);
 
-        // Hiển thị thông báo
         alert("Bạn đã đăng nhập thành công");
         console.log(MADOCGIA);
-        // Chuyển hướng đến trang chủ hoặc trang người dùng
         this.$router.push({ name: 'homepage' }); 
       } catch (error) {
         this.error = 'Tên đăng nhập hoặc mật khẩu không đúng.';

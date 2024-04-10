@@ -1,6 +1,5 @@
 <template>
   <main>
-    <!-- Carousel code -->
     <div class="banner">
       <img src="C:\CT449-BTL\QuanLyMuonSach-Frontend\src\assets\images\banner.png" alt="">
     </div>
@@ -29,7 +28,6 @@
         </div>
       </div>
 
-      <!-- Modal -->
       <div class="modal" :class="{ 'show': showModal }">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -38,7 +36,6 @@
               <button type="button" class="btn-close" aria-label="Close" @click="closeModal"></button>
             </div>
             <div class="modal-body">
-              <!-- Form for note and borrow date -->
               <div class="mb-3">
                 <label for="note" class="form-label">Ghi chú:</label>
                 <textarea class="form-control" id="note" v-model="note"></textarea>
@@ -76,13 +73,12 @@ export default {
       selectedBook: '',
       note: '',
       borrowDate: '',
-      searchKeyword: '' // Add search keyword data property
+      searchKeyword: ''
     };
   },
 
   async created() {
     try {
-      // Fetch books initially
       await this.fetchBooks();
     } catch (error) {
       console.error("Error fetching books:", error);
@@ -92,14 +88,12 @@ export default {
   methods: {
     async fetchBooks() {
       try {
-        // Fetch books from service based on search keyword
         this.books = await BookService.getByName(this.searchKeyword);
       } catch (error) {
         console.error("Error fetching books:", error);
       }
     },
 
-    // Function to open modal
     openModal(book) {
       this.showModal = true;
       this.selectedBook = book;
@@ -113,7 +107,6 @@ export default {
       this.borrowDate = '';
     },
     
-    // Function to borrow book
     async borrowBook() {
       try {
         const response = await BorrowBookService.create({
@@ -130,19 +123,17 @@ export default {
       }
     },
 
-    // Function to handle search
     async search() {
       try {
-        await this.fetchBooks(); // Fetch books based on search keyword
+        await this.fetchBooks(); 
       } catch (error) {
         console.error("Error searching books:", error);
       }
     },
     
-    // Function to reset search keyword
     resetSearch() {
       this.searchKeyword = '';
-      this.fetchBooks(); // Fetch books with empty search keyword to reset the search results
+      this.fetchBooks();
     }
   }
 };

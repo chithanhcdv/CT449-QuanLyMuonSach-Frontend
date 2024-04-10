@@ -29,7 +29,6 @@
             <button type="button" class="btn-close" aria-label="Close" @click="closeModal"></button>
           </div>
           <div class="modal-body">
-            <!-- Form for note and borrow date -->
             <div class="mb-3">
               <label for="note" class="form-label">Ghi chú:</label>
               <textarea class="form-control" id="note" v-model="note"></textarea>
@@ -62,38 +61,32 @@ export default {
       selectedBook: '',
       note: '',
       borrowDate: '',
-      publisher: null // Add publisher data property
+      publisher: null 
     };
   },
   async created() {
     try {
-      // Fetch book detail based on route parameter (id)
       const bookId = this.$route.params.id;
       this.book = await BookService.getById(bookId);
 
-      // Fetch all publishers
       const publishers = await PublisherService.getAll();
 
-      // Find publisher with matching MANXB
       this.publisher = publishers.find(pub => pub.MANXB === this.book.MANXB);
     } catch (error) {
       console.error("Error fetching book detail:", error);
     }
   },
   methods: {
-    // Function to open modal
     openModal() {
       this.showModal = true;
       this.selectedBook = this.book;
     },
-    // Function to close modal
     closeModal() {
       this.showModal = false;
       this.selectedBook = '';
       this.note = '';
       this.borrowDate = '';
     },
-    // Function to borrow book
     async borrowBook() {
       try {
         const response = await BorrowBookService.create({
@@ -112,7 +105,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-/* Add your CSS styles here */
-</style>

@@ -55,7 +55,6 @@ export default {
   },
   methods: {
     register() {
-      // Đưa thông tin đăng ký vào sự kiện emit để xử lý ở thành phần cha
       this.$emit('register', {
         USERNAME: this.username,
         PASSWORD: this.password,
@@ -70,7 +69,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-/* Add your component-specific styles here */
-</style>

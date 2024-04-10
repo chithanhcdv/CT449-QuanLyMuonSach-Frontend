@@ -1,47 +1,38 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+  <div id="app" :class="{ 'non-admin-background': !isAdminRoute }">
+    <AppHeader v-if="!isAdminRoute"/> <!-- Use AppHeader for non-admin routes -->
+    <AdminHeader v-if="isAdminRoute"/> <!-- Use AdminHeader for admin routes -->
+    <div class="" v-if="!isAdminRoute">
+      <router-view />
     </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+    <div class="container mt-3" v-if="isAdminRoute">
+      <router-view />
+    </div>
+    <AppFooter v-if="!isAdminRoute"/>
+  </div>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-}
+<script>
+import AppHeader from "@/components/AppHeader.vue";
+import AppFooter from "@/components/AppFooter.vue";
+import AdminHeader from "@/components/admin/AdminHeader.vue";
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
+export default {
+  components: {
+    AppHeader,
+    AppFooter,
+    AdminHeader,
+  },
+  computed: {
+    isAdminRoute() {
+      return this.$route.path.startsWith("/admin");
+    },
+  },
+};
+</script>
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+<style>
+.non-admin-background {
+  background-color: whitesmoke;
 }
 </style>

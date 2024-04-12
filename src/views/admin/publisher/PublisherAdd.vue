@@ -1,10 +1,15 @@
 <template>
-  <div class="page">
-    <h4 class="add-title mt-4">Thêm mới nhà xuất bản</h4>
-    <PublisherForm :publisher="{}" @submit:publisher="addPublisher" />
-    <p>{{ message }}</p>
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col card">
+      <h4 class="add-title mt-4 mb-5 fw-bold fs-3">THÊM NHÀ XUẤT BẢN MỚI</h4>
+      <PublisherForm :publisher="{}" @submit:publisher="addPublisher" />
+      <p>{{ message }}</p>
+    </div>
+    <div class="col-md-3"></div>
   </div>
 </template>
+
 
 <script>
 import PublisherForm from '@/components/admin/publisher/PublisherForm.vue';
@@ -27,6 +32,7 @@ export default {
         this.$router.push({ name: "publisher" });
       } catch (error) {
         console.log(error);
+        alert("Thêm mới nhà xuất bản không thành công");
       }
     },
   },

@@ -11,7 +11,7 @@ export default {
         <div class="col-md-6">
             <div class="p-2">
                 <strong>Mã nhân viên:</strong>
-                {{ staff.MANV }}
+                {{ staff.MSNV }}
             </div>
             <div class="p-2">
                 <strong>Họ và tên:</strong>

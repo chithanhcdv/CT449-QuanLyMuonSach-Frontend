@@ -22,7 +22,10 @@ export default {
             :class="{ active: index === activeIndex}"
             @click="updateActiveIndex(index)"
         >
-            {{ staff.HOTENNV }}
+            <div>
+                <h5 class="mb-1">{{ staff.HOTENNV }}</h5>
+                <p class="mb-1">Mã nhân viên: {{ staff.MSNV }}</p>
+            </div>
         </li>
     </ul>
 </template>

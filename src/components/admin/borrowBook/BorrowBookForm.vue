@@ -1,66 +1,77 @@
 <template>
   <Form
-    @submit="submitBook"
-    :validation-schema="bookFormSchema"
+    @submit="submitBorrowBook"
+    :validation-schema="borrowBookFormSchema"
   >
-    <!-- Các trường nhập sách -->
-
     <div class="form-group">
       <label for="readerId">Mã độc giả</label>
-      <Field
-        name="readerId"
-        type="text"
-        class="form-control"
-        v-model="bookLocal.MADOCGIA"
-      />
-      <ErrorMessage name="readerId" class="error-feedback" />
+      <div class="input-form">
+        <Field
+          name="readerId"
+          type="text"
+          class="form-control"
+          v-model="borrowBookLocal.MADOCGIA"
+        />
+        <ErrorMessage name="readerId" class="error-feedback" />
+      </div>
     </div>
 
     <div class="form-group">
       <label for="bookId">Mã sách</label>
-      <Field
-        name="bookId"
-        type="text"
-        class="form-control"
-        v-model="bookLocal.MASACH"
-      />
-      <ErrorMessage name="bookId" class="error-feedback" />
+      <div class="input-form">
+        <Field
+          name="bookId"
+          type="text"
+          class="form-control"
+          v-model="borrowBookLocal.MASACH"
+        />
+        <ErrorMessage name="bookId" class="error-feedback" />
+      </div>
     </div>
 
     <div class="form-group">
       <label for="note">Ghi chú</label>
-      <Field
-        name="note"
-        type="text"
-        class="form-control"
-        v-model="bookLocal.GHICHU"
-      />
-      <ErrorMessage name="note" class="error-feedback" />
+      <div class="input-form">
+        <Field
+          name="note"
+          type="text"
+          class="form-control"
+          v-model="borrowBookLocal.GHICHU"
+        />
+        <ErrorMessage name="note" class="error-feedback" />
+      </div>
     </div>
 
     <div class="form-group">
       <label for="borrowDate">Ngày mượn</label>
-      <Field
-        name="borrowDate"
-        type="date"
-        class="form-control"
-        v-model="bookLocal.NGAYMUON"
-      />
-      <ErrorMessage name="borrowDate" class="error-feedback" />
+      <div class="input-form">
+        <Field
+          name="borrowDate"
+          type="date"
+          class="form-control"
+          v-model="borrowBookLocal.NGAYMUON"
+        />
+        <ErrorMessage name="borrowDate" class="error-feedback" />
+      </div>
     </div>
 
     <div class="form-group">
       <label for="returnDate">Ngày trả</label>
-      <Field
-        name="returnDate"
-        type="date"
-        class="form-control"
-        v-model="bookLocal.NGAYTRA"
-      />
-      <ErrorMessage name="returnDate" class="error-feedback" />
+      <div class="input-form">
+        <Field
+          name="returnDate"
+          type="date"
+          class="form-control"
+          v-model="borrowBookLocal.NGAYTRA"
+        />
+        <ErrorMessage name="returnDate" class="error-feedback" />
+      </div>
     </div>
 
-    <!-- Nút thêm hoặc cập nhật sách -->
+    <div class="form-group add-button">
+      <button class="btn btn-primary">{{ isEditMode ? 'Lưu thông tin' : 'Thêm' }}</button>
+      <button v-if="isEditMode" type="button" class="ml-2 btn btn-danger" @click="deleteBorrowBook">Xóa Thông tin</button>
+    </div>
   </Form>
 </template>
 
@@ -74,13 +85,12 @@ export default {
     Field,
     ErrorMessage,
   },
-  emits: ["submit:book", "delete:book"],
+  emits: ["submit:borrowBook", "delete:borrowBook"],
   props: {
-    book: { type: Object, required: true }
+    borrowBook: { type: Object, required: true }
   },
   data() {
-    const bookFormSchema = yup.object().shape({
-      // Các quy tắc xác thực cho mượn sách
+    const borrowBookFormSchema = yup.object().shape({
       readerId: yup
         .string()
         .required("Mã độc giả không được để trống"),
@@ -92,26 +102,22 @@ export default {
       returnDate: yup.date().required("Ngày trả không được để trống"),
     });
     return {
-      bookLocal: { ...this.book },
-      bookFormSchema,
+      borrowBookLocal: { ...this.borrowBook },
+      borrowBookFormSchema,
     };
   },
   computed: {
     isEditMode() {
-      return !!this.bookLocal._id;
+      return !!this.borrowBookLocal._id;
     }
   },
   methods: {
-    submitBook() {
-      this.$emit("submit:book", this.bookLocal);
+    submitBorrowBook() {
+      this.$emit("submit:borrowBook", this.borrowBookLocal);
     },
-    deleteBook() {
-      this.$emit("delete:book", this.bookLocal._id);
+    deleteBorrowBook() {
+      this.$emit("delete:borrowBook", this.borrowBookLocal._id);
     },
   },
 };
 </script>
-
-<style scoped>
-/* CSS tùy chỉnh cho BorrowBookForm */
-</style>

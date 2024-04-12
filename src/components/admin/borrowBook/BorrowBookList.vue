@@ -22,7 +22,15 @@ export default {
       :class="{ active: index === activeIndex}"
       @click="updateActiveIndex(index)"
     >
-      {{ borrowBook.MADOCGIA }} - {{ borrowBook.MASACH }}
+      <div class="borrowBook-list">
+        <div>
+          <h5 class="mb-1">Mã độc giả: {{ borrowBook.MADOCGIA }}</h5>
+          <h5 class="mb-1">Mã sách: {{ borrowBook.MASACH }}</h5>
+        </div>
+        <div v-if="borrowBook.NGAYTRA" class="check-icon">
+          <i class="fa-solid fa-check fa-3x text-success"></i>
+        </div>
+      </div>
     </li>
   </ul>
 </template>

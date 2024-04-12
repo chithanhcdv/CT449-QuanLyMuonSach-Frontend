@@ -28,7 +28,13 @@ export default {
             <div class="p-2">
                 <strong>Ngày trả:</strong>
                 {{ borrowBook.NGAYTRA }}
-            </div>     
+            </div> 
+            <div v-if="borrowBook.NGAYTRA" class="p-2">
+                <strong >Trạng thái:</strong> Đã trả <i class="fa-solid fa-check px-1 text-success "></i> 
+            </div>    
+            <div v-else class="p-2">
+                <strong>Trạng thái:</strong> Chưa trả <i class="fa-solid fa-close px-1 text-danger"></i>
+            </div>
         </div>
     </div>
 </template>

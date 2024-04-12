@@ -1,7 +1,7 @@
 <template>
   <div id="app" :class="{ 'non-admin-background': !isAdminRoute }">
-    <AppHeader v-if="!isAdminRoute"/> <!-- Use AppHeader for non-admin routes -->
-    <AdminHeader v-if="isAdminRoute"/> <!-- Use AdminHeader for admin routes -->
+    <AppHeader v-if="!isAdminRoute"/> <!-- Sử dụng AppHeader nếu không phải trang Admin -->
+    <AdminHeader v-if="isAdminRoute"/> <!-- Sử dụng Admin Header nếu là trang Admin -->
     <div class="" v-if="!isAdminRoute">
       <router-view />
     </div>
@@ -30,9 +30,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.non-admin-background {
-  background-color: whitesmoke;
-}
-</style>

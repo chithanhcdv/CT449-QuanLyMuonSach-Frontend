@@ -1,53 +1,58 @@
 <template>
-  <header class="mt-3">
-    <nav class="navbar navbar-dark bg-dark">
+  <header id="header-admin">
+    <nav class="navbar navbar-dark bg-dark p-3">
       <div class="container">
-        <router-link to="/admin" class="navbar-brand">Admin Panel</router-link>
+        <router-link to="/admin" class="navbar-brand fw-bold fs-3">HOME</router-link>
         <button class="navbar-toggler me-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop" aria-controls="offcanvasWithBackdrop">
           <span class="navbar-toggler-icon"></span>
         </button>
       </div>
     </nav>  
     
-    <!-- Offcanvas container -->
     <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel">
       <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasWithBackdropLabel">Offcanvas</h5>
+        <h5 class="offcanvas-title fw-bold" id="offcanvasWithBackdropLabel">Admin Panel</h5>
         <button type="button" class="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
-        <!-- Offcanvas content -->
         <ul class="navbar-nav">
             <li class="nav-item" :class="{ 'active': $route.path === '/admin' }">
-                <router-link to="/admin" class="nav-link"><i class="fa-solid fa-home"></i>Home</router-link>
+              <router-link to="/admin" class="nav-link fw-bold"><i class="fa-solid fa-home"></i>Home</router-link>
             </li>  
             <li class="nav-item" :class="{ 'active': $route.path === '/admin/book' }">
-                <router-link to="/admin/book" class="nav-link"><i class="fa-solid fa-book"></i>Quản lý sách</router-link>
+              <router-link to="/admin/book" class="nav-link fw-bold"><i class="fa-solid fa-book"></i>Quản lý sách</router-link>
             </li>
             <li class="nav-item" :class="{ 'active': $route.path === '/admin/publisher' }">
-                <router-link to="/admin/publisher" class="nav-link"><i class="fa-solid fa-shop"></i>Nhà xuất bản</router-link>
+              <router-link to="/admin/publisher" class="nav-link fw-bold"><i class="fa-solid fa-shop"></i>Nhà xuất bản</router-link>
             </li>
             <li class="nav-item" :class="{ 'active': $route.path === '/admin/reader' }">
-                <router-link to="/admin/reader" class="nav-link"><i class="fa-solid fa-users"></i>Độc giả</router-link>
+              <router-link to="/admin/reader" class="nav-link fw-bold"><i class="fa-solid fa-users"></i>Độc giả</router-link>
             </li>
             <li class="nav-item" :class="{ 'active': $route.path === '/admin/staff' }">
-                <router-link to="/admin/staff" class="nav-link"><i class="fa-solid fa-user"></i>Nhân viên</router-link>
+              <router-link to="/admin/staff" class="nav-link fw-bold"><i class="fa-solid fa-user"></i>Nhân viên</router-link>
             </li>
             <li class="nav-item" :class="{ 'active': $route.path === '/admin/borrowBook' }">
-                <router-link to="/admin/borrowBook" class="nav-link"><i class="fa-solid fa-check"></i>Muợn trả</router-link>
+              <router-link to="/admin/borrowBook" class="nav-link fw-bold"><i class="fa-solid fa-check"></i>Muợn trả</router-link>
             </li>
             <hr>
 
-            <!-- Kiểm tra nếu đã đăng nhập -->
+            <li class="nav-item">
+              <a href="#" class="nav-link fw-bold"><i class="fa-solid fa-bell"></i>Thông báo</a>
+            </li>
+
+            <li class="nav-item">
+              <a href="#" class="nav-link fw-bold"><i class="fa-solid fa-envelope"></i>Hộp thư</a>
+            </li>
+           
             <template v-if="isLoggedIn">
                 <li class="nav-item" @click="logout">
-                    <a href="#" class="nav-link"><i class="fa-solid fa-sign-out"></i>Đăng xuất</a>
+                    <a href="#" class="nav-link fw-bold"><i class="fa-solid fa-sign-out"></i>Đăng xuất</a>
                 </li>
             </template>
-            <!-- Nếu chưa đăng nhập, hiển thị liên kết đăng nhập -->
+          
             <template v-else>
                 <li class="nav-item" :class="{ 'active': $route.path === '/admin/login' }">
-                    <router-link to="/admin/login" class="nav-link"><i class="fa-solid fa-right-to-bracket"></i>Đăng nhập</router-link>
+                    <router-link to="/admin/login" class="nav-link fw-bold"><i class="fa-solid fa-right-to-bracket"></i>Đăng nhập</router-link>
                 </li>
             </template>
         </ul>
@@ -90,29 +95,8 @@ export default {
 };
 </script>
 
-
-
 <style scoped>
-nav{
-    padding:10px;
-    padding-left:20px
-}
-
 header .offcanvas-start {
   width: 250px; 
-}
-
-li{
-    margin-bottom: 20px;
-}
-
-li:hover{
-  color: red;
-  font-weight: bold;
-}
-
-.active {
-    color: red; 
-    font-weight: bold; 
 }
 </style>

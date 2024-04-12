@@ -5,26 +5,30 @@
   >
     <div class="form-group">
       <label for="name">Tên nhà xuất bản</label>
-      <Field
-        name="name"
-        type="text"
-        class="form-control"
-        v-model="publisherLocal.TENNXB"
-      />
-      <ErrorMessage name="name" class="error-feedback" />
+        <div class="input-form">
+        <Field
+          name="name"
+          type="text"
+          class="form-control"
+          v-model="publisherLocal.TENNXB"
+        />
+        <ErrorMessage name="name" class="error-feedback" />
+      </div>
     </div>
     <div class="form-group">
       <label for="address">Địa chỉ</label>
-      <Field
-        name="address"
-        type="text"
-        class="form-control"
-        v-model="publisherLocal.DIACHI"
-      />
-      <ErrorMessage name="address" class="error-feedback" />
+      <div class="input-form">
+        <Field
+          name="address"
+          type="text"
+          class="form-control"
+          v-model="publisherLocal.DIACHI"
+        />
+        <ErrorMessage name="address" class="error-feedback" />
+      </div>
     </div>
 
-    <div class="form-group add-button">
+    <div class="admin-button mt-4">
       <button class="btn btn-primary">{{ isEditMode ? 'Lưu thông tin' : 'Thêm' }}</button>
       <button v-if="isEditMode" type="button" class="ml-2 btn btn-danger" @click="deletePublisher">Xóa nhà xuất bản</button>
     </div>
@@ -76,10 +80,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-form{
-  width: 50%;
-  margin: 0 auto;
-}
-</style>

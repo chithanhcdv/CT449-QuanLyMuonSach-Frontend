@@ -1,7 +1,7 @@
 <template>
   <main>
     <div class="banner">
-      <img src="C:\CT449-BTL\QuanLyMuonSach-Frontend\src\assets\images\banner.png" alt="">
+      <img src="@/assets/images/banner.png" alt="" class="img-fluid">
     </div>
     <div class="container">
       <div class="input-group mt-5 search-input">
@@ -11,19 +11,18 @@
       </div>
       <div id="main-page">
         <div class="row">
-          <div class="col-md-3" v-for="book in books" :key="book._id">
-            <router-link :to="{ name: 'book.detail', params: { id: book._id } }">
-              <div class="card mb-4 bg-white">
-                <img :src="book.HINHANH" class="card-img-top" alt="Book Image">
+          <div class="col-md-3 col-sm-6" v-for="book in books" :key="book._id">
+            <div class="card mb-4 bg-white">
+              <router-link :to="{ name: 'book.detail', params: { id: book._id } }" class="text-black">
+                <img :src="book.HINHANH" class="card-img-top img-fluid" alt="Book Image">
                 <div class="card-body">
                   <h5 class="card-title text-truncate">{{ book.TENSACH }}</h5>
-                  <h5 class="card-title text-truncate">{{ book.MASACH }}</h5>
-                  <div class="borrow-button">
-                    <button class="btn btn-primary" @click="openModal(book)">Mượn</button>
-                  </div>
                 </div>
+              </router-link>
+              <div class="borrow-button">
+                <button class="btn btn-primary" @click="openModal(book)">Mượn</button>
               </div>
-            </router-link>
+            </div>
           </div>
         </div>
       </div>
@@ -95,11 +94,14 @@ export default {
     },
 
     openModal(book) {
-      this.showModal = true;
-      this.selectedBook = book;
+      if (!localStorage.getItem('MADOCGIA')) {
+        alert("Bạn chưa đăng nhập");
+      } else{
+        this.showModal = true;
+        this.selectedBook = book;
+      }
     },
 
-    // Function to close modal
     closeModal() {
       this.showModal = false;
       this.selectedBook = '';
@@ -109,17 +111,37 @@ export default {
     
     async borrowBook() {
       try {
+        if (!this.borrowDate) {
+          this.showAlert("Vui lòng chọn ngày mượn", "warning");
+          return;
+        }
+
+        if (this.selectedBook.SOQUYEN <= 0) {
+          this.showAlert("Sách không còn trống để mượn", "warning");
+          return;
+        }
+
+        const existingRecord = await BorrowBookService.getByMADOCGIA(localStorage.getItem('MADOCGIA'));
+        const bookRecord = existingRecord.find(record => record.MASACH === this.selectedBook.MASACH);
+
+        if (bookRecord) {
+          this.showAlert("Bạn đã mượn sách này rồi", "warning");
+          return;
+        }
+
         const response = await BorrowBookService.create({
           MADOCGIA: localStorage.getItem('MADOCGIA'),
           MASACH: this.selectedBook.MASACH,
           GHICHU: this.note,
           NGAYMUON: this.borrowDate
         });
-        console.log("Borrow Book Response:", response);
-        alert("Mượn sách thành công");
+
+        await BookService.update(this.selectedBook._id, { SOQUYEN: this.selectedBook.SOQUYEN - 1 });
+        this.showAlert("Mượn sách thành công", "success");
         this.closeModal();
       } catch (error) {
-        console.error("Error borrowing book:", error);
+        console.error("Lỗi khi mượn sách:", error);
+        this.showAlert("Đã xảy ra lỗi, vui lòng thử lại sau", "error");
       }
     },
 
@@ -134,19 +156,17 @@ export default {
     resetSearch() {
       this.searchKeyword = '';
       this.fetchBooks();
+    },
+
+    showAlert(message, type) {
+      const icon = {
+        success: "✅",
+        warning: "⚠️",
+        error: "❌"
+      }[type];
+
+      alert(`${icon} ${message}`);
     }
   }
 };
 </script>
-
-
-<style scoped>
-.borrow-button{
-  text-align: center;
-}
-
-.search-input{
-  width: 50%;
-  margin: 0 auto;
-}
-</style>

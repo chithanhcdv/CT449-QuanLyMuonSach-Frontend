@@ -85,8 +85,8 @@ export default {
     computed: {
         bookStrings() {
             return this.books.map((book) => {
-                const { TENSACH, MANXB, TACGIA } = book;
-                return [TENSACH, MANXB, TACGIA].join("");
+                const { TENSACH, TACGIA, MASACH } = book;
+                return [TENSACH, TACGIA, MASACH].join("");
             });
         },
         filteredBooks() {
@@ -115,8 +115,8 @@ export default {
 
         async searchBooks(searchText) {
             try {
-                this.books = await BookService.getByName(searchText);
-                this.activeIndex = -1; // Reset active index after search
+                this.books = await BookService.getByNameOrAuthorOrBookId(searchText);
+                this.activeIndex = -1;
             } catch (error) {
                 console.log(error);
             }
@@ -148,8 +148,3 @@ export default {
     },
 };
 </script>
-
-
-<style scoped>
-
-</style>

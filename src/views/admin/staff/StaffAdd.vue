@@ -1,8 +1,12 @@
 <template>
-  <div class="page">
-    <h4 class="add-title mt-4">Thêm mới nhân viên</h4>
-    <StaffForm :staff="{}" @submit:staff="addStaff" />
-    <p>{{ message }}</p>
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col card">
+      <h4 class="add-title mt-4 mb-5 fw-bold fs-3">THÊM NHÂN VIÊN MỚI</h4>
+      <StaffForm :staff="{}" @submit:staff="addStaff" />
+      <p>{{ message }}</p>
+    </div>
+    <div class="col-md-3"></div>
   </div>
 </template>
 

@@ -26,6 +26,9 @@ import BorrowBookAdd from "@/views/admin/borrowBook/BorrowBookAdd.vue";
 import Login from "@/views/Login.vue";
 import Register from "@/views/Register.vue";
 import BookDetail from "@/views/BookDetail.vue"
+import BorrowBookHistory from "@/views/BorrowBookHistory.vue";
+import ReaderInformation from "@/views/ReaderInformation.vue";
+import ReaderInformationEdit from "@/views/ReaderInformationEdit.vue";
 
 const routes = [
     {
@@ -158,6 +161,30 @@ const routes = [
         name: "book.detail",
         component: BookDetail,
         props: true 
+    },
+
+    {
+        path: "/borrowBookHistory", 
+        name: "borrowBook.history",  
+        component: BorrowBookHistory 
+    },
+
+    {
+        path: "/readerInformation",
+        name: "reader.information",
+        component: ReaderInformation,
+    },
+
+    {
+        path: "/readerInformationEdit",
+        name: "readerInformation.edit",
+        component: ReaderInformationEdit,
+    },
+
+    {
+        path: "/:pathMatch(.*)*",
+        name: "notfound",
+        component: () => import("@/views/NotFound.vue"),
     },
 ];
 

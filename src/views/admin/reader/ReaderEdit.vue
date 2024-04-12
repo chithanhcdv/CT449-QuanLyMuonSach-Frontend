@@ -1,6 +1,8 @@
 <template>
-    <div v-if="reader" class="page">
-        <h4 class="edit-title">Hiệu chỉnh độc giả</h4>
+  <div v-if="reader" class="row">
+    <div class="col-md-3"></div>
+    <div class="col card">
+      <h4 class="edit-title mt-4 mb-5 fw-bold fs-3">HIỆU CHỈNH ĐỘC GIẢ</h4>
         <ReaderForm
             :reader="reader"
             @submit:reader="updateReader"
@@ -8,6 +10,8 @@
         />
         <p>{{ message }}</p>
     </div>
+    <div class="col-md-3"></div>
+  </div>
 </template>
 
 <script>

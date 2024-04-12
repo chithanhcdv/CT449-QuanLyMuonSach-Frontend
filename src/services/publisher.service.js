@@ -31,6 +31,10 @@ class PublisherService {
     async delete(id) {
         return (await this.api.delete(`/${id}`)).data;
     }
+
+    async getByMANXB(MANXB) {
+        return (await this.api.get(`/manxb/${MANXB}`)).data;
+    }
 }
 
 export default new PublisherService();

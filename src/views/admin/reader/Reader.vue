@@ -6,7 +6,7 @@
         <div class="mt-3 col-md-6">
             <h4>
                 Độc giả
-                <i class="fas fa-user"></i>
+                <i class="fas fa-users"></i>
             </h4>
             <ReaderList 
                 v-if="filteredReadersCount > 0"
@@ -36,7 +36,7 @@
             <div v-if="activeReader">
                 <h4 style="padding-left: 0.5rem;">
                     Chi tiết độc giả
-                    <i class="fas fa-user"></i>
+                    <i class="fas fa-users"></i>
                 </h4>
                 <ReaderDetail :reader="activeReader" />
                 <router-link
@@ -85,8 +85,8 @@ export default {
     computed: {
         readerStrings() {
             return this.readers.map((reader) => {
-                const { HOLOT, TEN } = reader;
-                return [HOLOT, TEN].join("");
+                const { HOLOT, TEN, MADOCGIA} = reader;
+                return [HOLOT, TEN, MADOCGIA].join("");
             });
         },
         filteredReaders() {
@@ -116,7 +116,7 @@ export default {
         async searchReaders(searchText) {
             try {
                 this.readers = await ReaderService.getByName(searchText);
-                this.activeIndex = -1; // Reset active index after search
+                this.activeIndex = -1;
             } catch (error) {
                 console.log(error);
             }
@@ -148,7 +148,3 @@ export default {
     },
 };
 </script>
-
-<style scoped>
-
-</style>

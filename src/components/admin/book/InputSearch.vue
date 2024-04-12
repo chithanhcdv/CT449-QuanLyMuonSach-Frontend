@@ -21,7 +21,7 @@ export default {
         <input
             type="text"
             class="form-control"
-            placeholder="Nhập tên sách cần tìm"
+            placeholder="Nhập tên sách, tên tác giả hoặc mã sách cần tìm"
             :value="modelValue"
             @input="updateSearchValue"
             @keyup.enter="submit"   

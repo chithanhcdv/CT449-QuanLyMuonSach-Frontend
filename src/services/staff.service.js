@@ -20,6 +20,10 @@ class StaffService {
         return (await this.api.get(`/${id}`)).data;
     }
 
+    async getByName(name) {
+        return (await this.api.get(`?name=${name}`)).data;
+    }
+
     async update(id, data) {
         return (await this.api.put(`/${id}`, data)).data;
     }
@@ -30,6 +34,10 @@ class StaffService {
 
     async login(data) {
         return (await this.api.post("/login", data)).data;
+    }
+
+    async getByMSNV(MSNV) {
+        return (await this.api.get(`/manhanvien/${MSNV}`)).data;
     }
 }
 

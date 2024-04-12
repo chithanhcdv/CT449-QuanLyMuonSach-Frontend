@@ -6,7 +6,7 @@
         <div class="mt-3 col-md-6">
             <h4>
                 Nhà xuất bản
-                <i class="fas fa-book"></i>
+                <i class="fas fa-shop"></i>
             </h4>
             <PublisherList 
                 v-if="filteredPublishersCount > 0"
@@ -36,7 +36,7 @@
             <div v-if="activePublisher">
                 <h4 style="padding-left: 0.5rem;">
                     Chi tiết nhà xuất bản
-                    <i class="fas fa-book"></i>
+                    <i class="fas fa-shop"></i>
                 </h4>
                 <PublisherDetail :publisher="activePublisher" />
                 <router-link
@@ -85,8 +85,8 @@ export default {
     computed: {
         publisherStrings() {
             return this.publishers.map((publisher) => {
-                const { TENNXB, DIACHI } = publisher;
-                return [TENNXB, DIACHI].join("");
+                const { TENNXB, MANXB } = publisher;
+                return [TENNXB, MANXB].join("");
             });
         },
         filteredPublishers() {
@@ -115,8 +115,8 @@ export default {
 
         async searchPublishers(searchText) {
             try {
-                this.publishers = await PublisherService.getByName(searchText);
-                this.activeIndex = -1; // Reset active index after search
+                this.publishers = await PublisherService.getByNameOrPublisherId(searchText);
+                this.activeIndex = -1;
             } catch (error) {
                 console.log(error);
             }
@@ -148,7 +148,3 @@ export default {
     },
 };
 </script>
-
-<style scoped>
-
-</style>

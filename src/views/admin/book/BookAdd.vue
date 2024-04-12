@@ -1,8 +1,12 @@
 <template>
-  <div class="page">
-    <h4 class="add-title mt-4">Thêm mới sách</h4>
-    <BookForm :book="{}" @submit:book="addBook" />
-    <p>{{ message }}</p>
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col card">
+      <h4 class="add-title mt-4 mb-5 fw-bold fs-3">THÊM SÁCH MỚI</h4>
+      <BookForm :book="{}" @submit:book="addBook" />
+      <p>{{ message }}</p>
+    </div>
+    <div class="col-md-3"></div>
   </div>
 </template>
 

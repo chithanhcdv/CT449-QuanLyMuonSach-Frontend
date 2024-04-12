@@ -85,8 +85,8 @@ export default {
     computed: {
         staffStrings() {
             return this.staffs.map((staff) => {
-                const { HOTENNV, USERNAME, CHUCVU } = staff;
-                return [HOTENNV, USERNAME, CHUCVU].join("");
+                const { HOTENNV, MSNV } = staff;
+                return [HOTENNV, MSNV].join("");
             });
         },
         filteredStaff() {
@@ -148,8 +148,3 @@ export default {
     },
 };
 </script>
-
-
-<style scoped>
-
-</style>

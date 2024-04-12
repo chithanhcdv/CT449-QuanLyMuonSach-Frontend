@@ -37,6 +37,10 @@ export default {
                 <strong>Tác giả:</strong>
                 {{ book.TACGIA }}
             </div>
+            <div class="p-2">
+                <strong>Thể loại:</strong>
+                {{ book.THELOAI }}
+            </div>
         </div>
 
         <div class="col-md-6">

@@ -1,6 +1,8 @@
 <template>
-    <div v-if="publisher" class="page">
-        <h4 class="edit-title">Hiệu chỉnh nhà xuất bản</h4>
+  <div v-if="publisher" class="row">
+    <div class="col-md-3"></div>
+    <div class="col card">
+      <h4 class="edit-title mt-4 mb-5 fw-bold fs-3">HIỆU CHỈNH NHÀ XUẤT BẢN</h4>
         <PublisherForm
             :publisher="publisher"
             @submit:publisher="updatePublisher"
@@ -8,6 +10,8 @@
         />
         <p>{{ message }}</p>
     </div>
+    <div class="col-md-3"></div>   
+  </div>
 </template>
 
 <script>

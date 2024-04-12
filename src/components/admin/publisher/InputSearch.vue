@@ -20,7 +20,7 @@ export default {
         <input
             type="text"
             class="form-control"
-            placeholder="Nhập tên nhà xuất bản cần tìm"
+            placeholder="Nhập tên nhà xuất bản hoặc mã nhà xuất bản cần tìm"
             :value="modelValue"
             @input="updateSearchValue"
             @keyup.enter="submit"   

@@ -35,6 +35,10 @@ class ReaderService {
     async login(data) {
         return (await this.api.post("/login", data)).data;
     }
+
+    async getByMADOCGIA(MADOCGIA) {
+        return (await this.api.get(`/madocgia/${MADOCGIA}`)).data;
+    }
 }
 
 export default new ReaderService();

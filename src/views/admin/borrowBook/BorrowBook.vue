@@ -1,16 +1,17 @@
 <template>
   <div>
-    <!-- Thêm phần tìm kiếm và danh sách mượn sách -->
-
+    <div class="col-md-6">
+        <InputSearch v-model="searchText" />
+    </div>
     <div class="row">
         <div class="mt-3 col-md-6">
             <h4>
-                Mượn sách
-                <i class="fas fa-book"></i>
+                Thông tin mượn sách
+                <i class="fas fa-user-pen"></i>
             </h4>
             <BorrowBookList 
-                v-if="filteredBooksCount > 0"
-                :borrowBooks="filteredBooks"
+                v-if="filteredBorrowBooksCount > 0"
+                :borrowBooks="filteredBorrowBooks"
                 v-model:activeIndex="activeIndex"
             />
             <p v-else>Không có sách nào</p>
@@ -36,7 +37,7 @@
             <div v-if="activeBorrowBook">
                 <h4 style="padding-left: 0.5rem;">
                     Chi tiết mượn sách
-                    <i class="fas fa-book"></i>
+                    <i class="fas fa-user-pen"></i>
                 </h4>
                 <BorrowBookDetail :borrowBook="activeBorrowBook" />
                 <router-link
@@ -53,13 +54,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Thêm BorrowBookForm -->
-    <BorrowBookForm 
-        :book="activeBorrowBook" 
-        @submit:book="submitBorrowBook" 
-        class="mt-3"
-    />
   </div>
 </template>
 
@@ -68,6 +62,7 @@ import BorrowBookDetail from '@/components/admin/borrowBook/BorrowBookDetail.vue
 import InputSearch from '@/components/admin/borrowBook/InputSearch.vue';
 import BorrowBookList from '@/components/admin/borrowBook/BorrowBookList.vue';
 import BorrowBookService from "@/services/borrowBook.service";
+import BookService from "@/services/book.service";
 
 export default {
     components: {
@@ -97,7 +92,7 @@ export default {
                 return [MADOCGIA, MASACH].join("");
             });
         },
-        filteredBooks() {
+        filteredBorrowBooks() {
             if (!this.searchText) return this.borrowBooks;
             return this.borrowBooks.filter((_borrowBook, index) =>
                 this.borrowBookStrings[index].includes(this.searchText)
@@ -105,10 +100,10 @@ export default {
         },
         activeBorrowBook() {
             if (this.activeIndex < 0) return null;
-            return this.filteredBooks[this.activeIndex];
+            return this.filteredBorrowBooks[this.activeIndex];
         },
-        filteredBooksCount() {
-            return this.filteredBooks.length;
+        filteredBorrowBooksCount() {
+            return this.filteredBorrowBooks.length;
         },
     },
 
@@ -123,8 +118,8 @@ export default {
 
         async searchBorrowBooks(searchText) {
             try {
-                this.borrowBooks = await BorrowBookService.getByReaderId(searchText);
-                this.activeIndex = -1; // Reset active index after search
+                this.borrowBooks = await BorrowBookService.getByReaderIdOrBookId(searchText);
+                this.activeIndex = -1; 
             } catch (error) {
                 console.log(error);
             }
@@ -136,9 +131,21 @@ export default {
         },
 
         async removeAllBorrowBooks() {
-            if (confirm("Bạn muốn xóa tất cả Sách?")) {
+            if (confirm("Bạn muốn xóa tất cả thông tin mượn sách?")) {
                 try {
+                    const masachList = this.borrowBooks.map(borrowBook => borrowBook.MASACH);           
                     await BorrowBookService.deleteAll();
+                    for (const MASACH of masachList) {
+                        const book = await BookService.getByMASACH(MASACH);
+                        if (book.length > 0 && !this.borrowBooks[0].NGAYTRA) {                     
+                            book[0].SOQUYEN++;
+                            await BookService.updateByMASACH(MASACH, book[0]);
+                        }
+                        else if(book.length > 0 && this.borrowBooks[0].NGAYTRA){
+                            await BookService.updateByMASACH(MASACH, book[0]);
+                        }
+                    }
+
                     this.refreshList();
                 } catch (error) {
                     console.log(error);
@@ -170,7 +177,3 @@ export default {
     },
 };
 </script>
-
-<style scoped>
-/* CSS tùy chỉnh cho BorrowBook */
-</style>

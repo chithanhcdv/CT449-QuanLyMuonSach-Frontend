@@ -5,63 +5,75 @@
   >
     <div class="form-group">
       <label for="name">Họ và tên</label>
-      <Field
-        name="name"
-        type="text"
-        class="form-control"
-        v-model="staffLocal.HOTENNV"
-      />
-      <ErrorMessage name="name" class="error-feedback" />
+        <div class="input-form">
+        <Field
+          name="name"
+          type="text"
+          class="form-control"
+          v-model="staffLocal.HOTENNV"
+        />
+        <ErrorMessage name="name" class="error-feedback" />
+      </div>
     </div>
     <div class="form-group">
       <label for="username">Tên đăng nhập</label>
-      <Field
-        name="username"
-        type="text"
-        class="form-control"
-        v-model="staffLocal.USERNAME"
-      />
-      <ErrorMessage name="username" class="error-feedback" />
+      <div class="input-form">
+        <Field
+          name="username"
+          type="text"
+          class="form-control"
+          v-model="staffLocal.USERNAME"
+        />
+        <ErrorMessage name="username" class="error-feedback" />
+      </div>
     </div>
     <div class="form-group">
       <label for="password">Mật khẩu</label>
-      <Field
-        name="password"
-        type="password"
-        class="form-control"
-        v-model="staffLocal.PASSWORD"
-      />
-      <ErrorMessage name="password" class="error-feedback" />
+      <div class="input-form">
+        <Field
+          name="password"
+          type="password"
+          class="form-control"
+          v-model="staffLocal.PASSWORD"
+        />
+        <ErrorMessage name="password" class="error-feedback" />
+      </div>
     </div>
     <div class="form-group">
       <label for="position">Chức vụ</label>
-      <Field
-        name="position"
-        type="text"
-        class="form-control"
-        v-model="staffLocal.CHUCVU"
-      />
-      <ErrorMessage name="position" class="error-feedback" />
+      <div class="input-form">
+        <Field
+          name="position"
+          type="text"
+          class="form-control"
+          v-model="staffLocal.CHUCVU"
+        />
+        <ErrorMessage name="position" class="error-feedback" />
+      </div>
     </div>
     <div class="form-group">
       <label for="address">Địa chỉ</label>
-      <Field
-        name="address"
-        type="text"
-        class="form-control"
-        v-model="staffLocal.DIACHI"
-      />
-      <ErrorMessage name="address" class="error-feedback" />
+      <div class="input-form">
+        <Field
+          name="address"
+          type="text"
+          class="form-control"
+          v-model="staffLocal.DIACHI"
+        />
+        <ErrorMessage name="address" class="error-feedback" />
+      </div>
     </div>
     <div class="form-group">
       <label for="phone">Số điện thoại</label>
-      <Field
-        name="phone"
-        type="text"
-        class="form-control"
-        v-model="staffLocal.SODIENTHOAI"
-      />
-      <ErrorMessage name="phone" class="error-feedback" />
+      <div class="input-form">
+        <Field
+          name="phone"
+          type="text"
+          class="form-control"
+          v-model="staffLocal.SODIENTHOAI"
+        />
+        <ErrorMessage name="phone" class="error-feedback" />
+      </div>
     </div>
 
     <div class="form-group add-button">
@@ -135,9 +147,4 @@ export default {
 };
 </script>
 
-<style scoped>
-form{
-  width: 50%;
-  margin: 0 auto;
-}
-</style>
+

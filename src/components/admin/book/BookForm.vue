@@ -5,76 +5,97 @@
   >
     <div class="form-group">
       <label for="title">Tên sách</label>
-      <Field
-        name="title"
-        type="text"
-        class="form-control"
-        v-model="bookLocal.TENSACH"
-      />
-      <ErrorMessage name="title" class="error-feedback" />
+      <div class="input-form">
+        <Field
+          name="title"
+          type="text"
+          class="form-control"
+          v-model="bookLocal.TENSACH"
+        />
+        <ErrorMessage name="title" class="error-feedback" />
+      </div>
     </div>
     <div class="form-group">
       <label for="price">Đơn giá</label>
-      <Field
-        name="price"
-        type="number"
-        class="form-control"
-        v-model.number="bookLocal.DONGIA"
-      />
-      <ErrorMessage name="price" class="error-feedback" />
+      <div class="input-form">
+        <Field
+          name="price"
+          type="number"
+          class="form-control"
+          v-model.number="bookLocal.DONGIA"
+        />
+        <ErrorMessage name="price" class="error-feedback" />
+      </div>
     </div>
     <div class="form-group">
       <label for="quantity">Số lượng</label>
-      <Field
+      <div class="input-form">
+        <Field
         name="quantity"
         type="number"
         class="form-control"
         v-model.number="bookLocal.SOQUYEN"
-      />
-      <ErrorMessage name="quantity" class="error-feedback" />
+        />
+        <ErrorMessage name="quantity" class="error-feedback" />
+      </div>
     </div>
     <div class="form-group">
       <label for="year">Năm xuất bản</label>
-      <Field
-        name="year"
-        type="number"
-        class="form-control"
-        v-model.number="bookLocal.NAMXUATBAN"
-      />
-      <ErrorMessage name="year" class="error-feedback" />
+      <div class="input-form">
+        <Field
+          name="year"
+          type="number"
+          class="form-control"
+          v-model.number="bookLocal.NAMXUATBAN"
+        />
+        <ErrorMessage name="year" class="error-feedback" />
+      </div>
     </div>
     <div class="form-group">
       <label for="publisher">Mã NXB</label>
-      <Field
-        name="publisher"
-        type="text"
-        class="form-control"
-        v-model="bookLocal.MANXB"
-      />
-      <ErrorMessage name="publisher" class="error-feedback" />
+      <div class="input-form">
+        <Field
+          name="publisher"
+          type="text"
+          class="form-control"
+          v-model="bookLocal.MANXB"
+        />
+        <ErrorMessage name="publisher" class="error-feedback" />
+      </div>
     </div>
     <div class="form-group">
       <label for="author">Tác giả</label>
-      <Field
-        name="author"
-        type="text"
-        class="form-control"
-        v-model="bookLocal.TACGIA"
-      />
-      <ErrorMessage name="author" class="error-feedback" />
+      <div class="input-form">
+        <Field
+          name="author"
+          type="text"
+          class="form-control"
+          v-model="bookLocal.TACGIA"
+        />
+        <ErrorMessage name="author" class="error-feedback" />
+      </div>
     </div>
     <div class="form-group">
-      <label for="author">Hình ảnh</label>
-      <Field
-        name="image"
-        type="text"
-        class="form-control"
-        v-model="bookLocal.HINHANH"
-      />
-      <ErrorMessage name="image" class="error-feedback" />
+      <label for="theloai">Thể loại</label>
+      <div class="input-form">
+        <select name="theloai" class="form-control" v-model="bookLocal.THELOAI">
+          <option value="Văn học">Văn học</option>
+          <option value="Kinh tế">Kinh tế</option>
+          <option value="Tâm lý">Tâm lý</option>
+          <option value="Hồi ký">Hồi ký</option>
+          <option value="Nuôi dạy">Nuôi dạy</option>
+          <option value="Thiếu nhi">Thiếu nhi</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="image">Hình ảnh</label>
+      <div class="input-form">
+        <input name="image" type="text" class="form-control" v-model="bookLocal.HINHANH"/>
+      </div>
     </div>
 
-    <div class="form-group add-button">
+    <div class="admin-button mt-4">
       <button class="btn btn-primary">{{ isEditMode ? 'Lưu thông tin' : 'Thêm' }}</button>
       <button v-if="isEditMode" type="button" class="ml-2 btn btn-danger" @click="deleteBook">Xóa sách</button>
     </div>
@@ -123,6 +144,7 @@ export default {
         .required("Tác giả không được để trống")
         .max(255, "Tác giả không quá 255 ký tự"),
     });
+    
     return {
       bookLocal: { ...this.book },
       bookFormSchema,
@@ -143,10 +165,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-form{
-  width: 50%;
-  margin: 0 auto;
-}
-</style>

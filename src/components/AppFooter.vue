@@ -38,25 +38,3 @@
         </div>
     </footer>
 </template>
-
-<style>
-.info a{
-    text-decoration: none;
-}
-
-.fa-twitter{
-    color: skyblue;
-}
-
-#footer-end {
-    text-align: center;
-}
-
-footer p{
-    color: white;
-}
-
-footer{
-    background-color: green;
-}
-</style>

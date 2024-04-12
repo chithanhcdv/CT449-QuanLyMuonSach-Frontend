@@ -22,10 +22,9 @@ export default {
             :class="{ active: index === activeIndex}"
             @click="updateActiveIndex(index)"
         >
-            <!-- Hiển thị tên nhà xuất bản bên phải -->
             <div>
                 <h5 class="mb-1">{{ publisher.TENNXB }}</h5>
-                <p class="mb-1">{{ publisher.DIACHI }}</p>
+                <p class="mb-1">Mã NXB: {{ publisher.MANXB }}</p>
             </div>
         </li>
     </ul>

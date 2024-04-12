@@ -27,6 +27,14 @@ class BorrowBookService {
     async delete(id) {
         return (await this.api.delete(`/${id}`)).data;
     }
+    
+    async getByMADOCGIA(MADOCGIA) {
+        return (await this.api.get(`/madocgia/${MADOCGIA}`)).data;
+    }
+
+    async getByMASACH(MASACH) {
+        return (await this.api.get(`/masach/${MASACH}`)).data;
+    }
 }
 
 export default new BorrowBookService();

@@ -9,11 +9,10 @@
                     <p class="card-text">Tác giả: {{ book.TACGIA }}</p>
                     <p class="card-text">Số quyển: {{ book.SOQUYEN }}</p>
                     <p class="card-text">Đơn giá: {{ book.DONGIA }}đ</p>
-                    <p class="card-text">Tên Nhà xuất bản: {{ publisher.TENNXB }}</p>
+                    <p class="card-text">Nhà xuất bản: {{ publisher ? publisher.TENNXB : 'N/A' }}</p>
                     <p class="card-text">Năm xuất bản: {{ book.NAMXUATBAN }}</p>
                     <p class="card-text">Thể loại: {{ book.THELOAI }}</p>
-                    <p class="card-text">Mô tả: {{ book.MOTA }}</p>
-                    <div class="borrow-button mt-3">
+                    <div class="mt-3">
                         <button class="btn btn-primary" @click="openModal">Mượn</button>
                     </div>
                 </div>
@@ -72,6 +71,10 @@ export default {
       const publishers = await PublisherService.getAll();
 
       this.publisher = publishers.find(pub => pub.MANXB === this.book.MANXB);
+      
+      if (!this.publisher || this.publisher.MANXB !== this.book.MANXB) {
+        this.publisher = { TENNXB: null };
+      }
     } catch (error) {
       console.error("Error fetching book detail:", error);
     }
@@ -80,6 +83,7 @@ export default {
     openModal() {
       this.showModal = true;
       this.selectedBook = this.book;
+      console.log(this.selectedBook.SOQUYEN);
     },
     closeModal() {
       this.showModal = false;
@@ -87,21 +91,54 @@ export default {
       this.note = '';
       this.borrowDate = '';
     },
+
     async borrowBook() {
       try {
+        if (!this.borrowDate) {
+          this.showAlert("Vui lòng chọn ngày mượn", "warning");
+          return;
+        }
+
+        if (this.selectedBook.SOQUYEN <= 0) {
+          this.showAlert("Sách không còn trống để mượn", "warning");
+          return;
+        }
+
+        const existingRecord = await BorrowBookService.getByMADOCGIA(localStorage.getItem('MADOCGIA'));
+        const bookRecord = existingRecord.find(record => record.MASACH === this.selectedBook.MASACH);
+
+        if (bookRecord) {
+          this.showAlert("Bạn đã mượn sách này rồi", "warning");
+          return;
+        }
+
         const response = await BorrowBookService.create({
           MADOCGIA: localStorage.getItem('MADOCGIA'),
           MASACH: this.selectedBook.MASACH,
           GHICHU: this.note,
           NGAYMUON: this.borrowDate
         });
-        console.log("Borrow Book Response:", response);
-        alert("Mượn sách thành công");
+
+        await BookService.update(this.selectedBook._id, { SOQUYEN: this.selectedBook.SOQUYEN - 1 });
+
+        this.showAlert("Mượn sách thành công", "success");
         this.closeModal();
       } catch (error) {
         console.error("Error borrowing book:", error);
+        this.showAlert("Đã xảy ra lỗi, vui lòng thử lại sau", "error");
       }
+    },
+
+    showAlert(message, type) {
+      const icon = {
+        success: "✅",
+        warning: "⚠️",
+        error: "❌"
+      }[type];
+
+      alert(`${icon} ${message}`);
     }
   }
 };
 </script>
+

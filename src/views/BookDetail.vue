@@ -81,10 +81,14 @@ export default {
   },
   methods: {
     openModal() {
-      this.showModal = true;
-      this.selectedBook = this.book;
-      console.log(this.selectedBook.SOQUYEN);
+      if (!localStorage.getItem('MADOCGIA')) {
+        alert("Bạn chưa đăng nhập");
+      } else{
+        this.showModal = true;
+        this.selectedBook = this.book;
+      }
     },
+    
     closeModal() {
       this.showModal = false;
       this.selectedBook = '';

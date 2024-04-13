@@ -17,7 +17,7 @@
             <div v-if="reader">
               <p class="pb-1"><strong>Mã độc giả:</strong> {{ reader[0].MADOCGIA }}</p>
               <p class="pb-1"><strong>Tên tài khoản:</strong> {{ reader[0].USERNAME }}</p>
-              <p class="pb-1"><strong>Họ và tên:</strong> {{ reader[0].HOLOT }} {{ reader.TEN }}</p>
+              <p class="pb-1"><strong>Họ và tên:</strong> {{ reader[0].HOLOT }} {{ reader[0].TEN }}</p>
               <p class="pb-1"><strong>Ngày sinh:</strong> {{ reader[0].NGAYSINH }}</p>
               <p class="pb-1"><strong>Giới tính:</strong> {{ reader[0].PHAI }}</p>
               <p class="pb-1"><strong>Địa chỉ:</strong> {{ reader[0].DIACHI }}</p>

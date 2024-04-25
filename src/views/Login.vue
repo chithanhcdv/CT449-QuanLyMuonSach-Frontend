@@ -6,7 +6,7 @@
         <h2 class="fw-bold fs-2" id="login-title-user">ĐĂNG NHẬP</h2>
         <LoginForm @login="handleLogin" />
         <div id="register-link">
-          <p>Chưa có tài khoản <span><router-link to="/register">Đăng ký</router-link></span></p>
+          <p>Chưa có tài khoản <span><router-link :to="{ name:'reader.register'}">Đăng ký</router-link></span></p>
         </div>
         <div class="error-text">
           <p v-if="error" class="text-danger">{{ error }}</p>
@@ -40,7 +40,6 @@ export default {
         localStorage.setItem('User_token', true);
 
         this.showAlert("Bạn đã đăng nhập thành công", "success")
-        console.log(MADOCGIA);
         this.$router.push({ name: 'homepage' }); 
       } catch (error) {
         this.error = 'Tên đăng nhập hoặc mật khẩu không đúng.';

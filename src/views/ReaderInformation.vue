@@ -4,9 +4,9 @@
     <div class="row">
       <div class="col-md-2 card bg-white" id="reader-link">
         <div class="navbar-vertical">
-          <router-link to="/readerInformation" class="nav-link mb-4 text-primary"><i class="fa-solid fa-user px-2"></i>Thông tin độc giả</router-link>
-          <router-link to="/readerInformationEdit" class="nav-link mb-4"><i class="fa-solid fa-pen px-2"></i>Thay đổi thông tin</router-link>
-          <router-link to="/borrowBookHistory" class="nav-link mb-4"><i class="fa-solid fa-user-pen px-2"></i>Lịch sử mượn sách</router-link>
+          <router-link :to="{ name: 'reader.information'}" class="nav-link mb-4 text-primary"><i class="fa-solid fa-user px-2"></i>Thông tin độc giả</router-link>
+          <router-link :to="{ name: 'readerInformation.edit'}" class="nav-link mb-4"><i class="fa-solid fa-pen px-2"></i>Thay đổi thông tin</router-link>
+          <router-link :to="{ name: 'borrowBook.history'}" class="nav-link mb-4"><i class="fa-solid fa-user-pen px-2"></i>Lịch sử mượn sách</router-link>
           <a href="#" class="nav-link mb-4"><i class="fa-solid fa-key px-2"></i>Đổi mật khẩu</a>
         </div>
       </div>

@@ -84,7 +84,7 @@ export default {
       try {
         await ReaderService.update(this.editedReader._id, this.editedReader);
         this.showAlert("Thay đổi thông tin thành công", "success");
-        this.$router.push({ name: "reader.information", params: { MADOCGIA: this.editedReader._id } });
+        this.$router.push({ name: "reader.information" });
       } catch (error) {
         console.error("Xảy ra lỗi khi cập nhật thông tin độc giả:", error);
         this.showAlert("Xảy ra lỗi khi thay đổi thông tin", "error");

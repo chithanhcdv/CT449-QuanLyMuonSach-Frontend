@@ -7,7 +7,7 @@
                 <p class="fs-5 fw-bold mt-4 mb-4">
                     Oops, không thể tìm thấy trang.
                 </p>
-                <p class="fs-5 fw-bold">Trở về<router-link to="/" class="m-1">Trang chủ.</router-link></p> 
+                <p class="fs-5 fw-bold">Trở về<router-link :to="{name :'homepage'}" class="m-1">Trang chủ.</router-link></p> 
             </div>
         <div class="col-md-4"></div>
     </div>

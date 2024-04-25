@@ -50,7 +50,7 @@
 <script>
 import BookService from "@/services/book.service";
 import BorrowBookService from "@/services/borrowBook.service";
-import PublisherService from "@/services/publisher.service"; // Import PublisherService
+import PublisherService from "@/services/publisher.service";
 
 export default {
   data() {

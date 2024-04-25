@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-2 icon-div">
-          <router-link to="/">
+          <router-link :to="{ name:'homepage' }">
             <img src="@/assets/images/icon.png" class="img-fluid icon">
           </router-link>
         </div>                 
@@ -16,7 +16,7 @@
               <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                   <li class="nav-item">
-                    <router-link to="/" class="nav-link fw-bold fs-5">TRANG CHỦ</router-link>
+                    <router-link :to="{ name:'homepage'}" class="nav-link fw-bold fs-5">TRANG CHỦ</router-link>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link fw-bold fs-5" href="#">VỀ THƯ VIỆN</a>
@@ -36,8 +36,8 @@
               <i class="fa-solid fa-user fa-2x header-icon" id="user-icon"></i>
             </button>
             <ul class="dropdown-menu text-center">
-              <li><router-link to="/readerInformation" class="nav-link dropdown-item fw-bold fs-5 mb-2">Thông tin độc giả</router-link></li>
-              <li><router-link to="/borrowBookHistory" class="nav-link dropdown-item fw-bold fs-5 mb-2">Thông tin mượn sách</router-link></li>
+              <li><router-link :to="{ name:'reader.information'}" class="nav-link dropdown-item fw-bold fs-5 mb-2">Thông tin độc giả</router-link></li>
+              <li><router-link :to="{ name:'borrowBook.history'}" class="nav-link dropdown-item fw-bold fs-5 mb-2">Thông tin mượn sách</router-link></li>
               <li><button @click="logout" class="nav-link dropdown-item fw-bold fs-5 mb-2">Đăng xuất</button></li>
             </ul>   
           </div> 
@@ -46,8 +46,8 @@
               <i class="fa-solid fa-user fa-2x header-icon" id="user-icon"></i>
             </button>
             <ul class="dropdown-menu text-center">
-              <li><router-link to="/login" class="nav-link dropdown-item fw-bold fs-5 mb-2">Đăng nhập</router-link></li>
-              <li><router-link to="/register" class="nav-link dropdown-item fw-bold fs-5 mb-2">Đăng ký</router-link></li>
+              <li><router-link :to="{ name:'reader.login'}" class="nav-link dropdown-item fw-bold fs-5 mb-2">Đăng nhập</router-link></li>
+              <li><router-link :to="{ name:'reader.register'}" class="nav-link dropdown-item fw-bold fs-5 mb-2">Đăng ký</router-link></li>
             </ul>    
           </div>  
         </div> 

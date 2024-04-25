@@ -6,10 +6,7 @@
         <h2 class="fw-bold fs-2" id="register-title-user">ĐĂNG KÝ TÀI KHOẢN</h2>
         <RegisterForm @register="handleRegister" />
         <div id="login-link">
-          <p>Đã có tài khoản <span><router-link to="/login">Đăng nhập</router-link></span></p>
-        </div>
-        <div class="error-text">
-          <p v-if="error" class="text-danger">{{ error }}</p>
+          <p>Đã có tài khoản? <span><router-link :to="{ name:'reader.login' }">Đăng nhập</router-link></span></p>
         </div>
       </div>
     </div>
